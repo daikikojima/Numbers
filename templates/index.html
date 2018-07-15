@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
+<form action="/predict" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="image">画像を入れてね!</label>
+        <input type="file" class="form-control" id="img" name="img">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
