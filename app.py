@@ -1,7 +1,12 @@
 import os
 
-from flask import Flask, render_template, request, url_for, redirect, send_from_directory
+from flask import Flask, render_template, request, url_for, redirect, send_from_directory, flash
 from werkzeug.utils import secure_filename
+from PIL import Image
+import string
+import random
+
+from DNN.mnist_recog import predict_num
 
 app = Flask(__name__)
 
