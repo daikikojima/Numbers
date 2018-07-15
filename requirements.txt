@@ -1,6 +1,20 @@
-pillow
-werkzeug
-jinja2
-flask == 1.0.2
-chainer == 4.2.0
-numpy == 1.14.5
+chainer==4.2.0
+click==6.7
+cycler==0.10.0
+fastrlock==0.3
+filelock==3.0.4
+Flask==1.0.2
+gunicorn==19.9.0
+itsdangerous==0.24
+Jinja2==2.10
+kiwisolver==1.0.1
+MarkupSafe==1.0
+matplotlib==2.2.2
+numpy==1.14.5
+Pillow==5.2.0
+protobuf==3.6.0
+pyparsing==2.2.0
+python-dateutil==2.7.3
+pytz==2018.5
+six==1.11.0
+Werkzeug==0.14.1
