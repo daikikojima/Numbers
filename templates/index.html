@@ -1,10 +1,25 @@
 {% extends "layout.html" %}
 {% block content %}
-<form action="/predict" method="POST" enctype="multipart/form-data">
-    <div class="form-group">
-        <label for="image">画像を入れてね!</label>
-        <input type="file" class="form-control" id="img" name="img">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="card">
+        <h5 class="card-header">画像を入れてね!</h5>
+        <div class="card-body">
+            <form action="/predict" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <input type="file" class="form-control" id="img" name="img">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
 {% endblock %}
