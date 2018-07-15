@@ -1,0 +1,13 @@
+img {
+    height: 500px;
+    margin: 10px;
+    object-fit: contain;
+}
+
+div.card{
+    margin: 5% 20% 0% 20%;
+}
+
+div.alert{
+    margin: 5% 20% 0% 20%;
+}
