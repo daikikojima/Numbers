@@ -9,6 +9,7 @@ import random
 from DNN.mnist_recog import predict_num
 
 app = Flask(__name__)
+app.secret_key = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(20)])
 
 UPLOAD_FOLDER = './uploads'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'gif'])
@@ -27,11 +28,15 @@ def predict():
     if request.method=="POST":
         img = request.files['img']
         if img and allowed_file(img.filename):
+            # Save img file
             filename = secure_filename(img.filename)
             img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             img_url = '/uploads/' + filename
-            return render_template('result.html',img_url = img_url)
-
+            # Predict from img
+            image = Image.open(img.stream)
+            label = predict_num(image)
+            return render_template('result.html',img_url = img_url, label = label)
+    flash("画像の拡張子はpng, jpg, gifだけだよ!")
     return redirect(url_for('index'))
 
 @app.route('/uploads/<filename>')
