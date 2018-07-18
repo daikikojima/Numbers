@@ -5,6 +5,7 @@ from werkzeug.utils import secure_filename
 from PIL import Image
 import string
 import random
+from datetime import datetime
 
 from DNN.mnist_recog import predict_num
 
@@ -29,7 +30,7 @@ def predict():
         img = request.files['img']
         if img and allowed_file(img.filename):
             # Save img file
-            filename = secure_filename(img.filename)
+            filename = datetime.now().strftime("%Y%m%d%H%M%S") + "." + secure_filename(img.filename).split(".")[-1]
             img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             img_url = '/uploads/' + filename
             # Predict from img
