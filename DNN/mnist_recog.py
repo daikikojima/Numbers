@@ -1,6 +1,6 @@
 import chainer
 from chainer import serializers
-from PIL import ImageOps
+from PIL import ImageOps, Image
 import chainer.links as L
 from chainer import Variable
 import numpy as np
@@ -23,12 +23,16 @@ def mid(gray):
     rst = (gray > 128) * 255
     return rst
 
-
+def squarelize(img):
+    max_len = max(img.size[0], img.size[1])
+    rst = Image.new("L", [max_len, max_len], (0))
+    rst.paste(img, (int((max_len - img.size[0]) / 2), int((max_len - img.size[0]) / 2)))
+    return rst
 def predict_num(img):
     model = L.Classifier(models.MLP(1000, 10))
     serializers.load_npz("./DNN/mymodel.npz", model)
-
-    img_resize = ImageOps.grayscale(img.resize((28, 28)))
+    modified = squarelize(ImageOps.grayscale(img))
+    img_resize = modified.resize((28, 28))
     data = 255 - np.array(img_resize, dtype=np.float32)
     x = np.array(mid(data), dtype=np.float32)
     x = x / 255.0
