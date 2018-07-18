@@ -28,6 +28,7 @@ def squarelize(img):
     rst = Image.new("L", [max_len, max_len], (0))
     rst.paste(img, (int((max_len - img.size[0]) / 2), int((max_len - img.size[0]) / 2)))
     return rst
+
 def predict_num(img):
     model = L.Classifier(models.MLP(1000, 10))
     serializers.load_npz("./DNN/mymodel.npz", model)
